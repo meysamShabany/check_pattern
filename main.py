@@ -46,3 +46,11 @@ class CheckPattern:
             return True
         else:
             return False
+    def check_email_pattern(self):
+        pass
+    def check_password_upper_lower_number_specific(self):
+        pass
+    def check_password_letter_number(self):
+        pass
+    def check_password_upper_lower_number(self):
+        pass
