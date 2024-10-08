@@ -38,6 +38,26 @@ class CheckPattern:
             return True
         else:
             return False
+    def check_iranian_nation_code(self)->bool:
+        if self.value.isdigit() and len(self.value) == 10:
+            first_number = int(self.value[0])
+            counter = 0
+            total_sum = 0
+
+            for i in range(1, 10):
+                num = int(self.value[i - 1])
+                if num == first_number:
+                    counter += 1
+                total_sum += num * (11 - i)
+
+            r = total_sum % 11
+            if r > 1:
+                r = 11 - r
+
+            if r == int(self.value[-1]) and counter < 9:
+                return True
+
+        return False
         
     def check_iranian_phone(self):
         #r'^09(0[0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9])-?[0-9]{3}-?[0-9]{4}$'
@@ -47,9 +67,15 @@ class CheckPattern:
         else:
             return False
     def check_email_pattern(self):
-        pass
+        if re.fullmatch("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" , self.value):
+            return True
+        else:
+            return False
     def check_password_upper_lower_number_specific(self):
-        pass
+        if re.fullmatch(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$' , self.value):
+            return True
+        else:
+            return False
     def check_password_letter_number(self):
         pass
     def check_password_upper_lower_number(self):
